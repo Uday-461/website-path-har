@@ -34,3 +34,13 @@ class JourneyResult(BaseModel):
 	har_path: Path | None = None
 	dom_snapshots: list[DOMSnapshot] = []
 	error: str | None = None
+
+
+class AssertResult(BaseModel):
+	model_config = ConfigDict(extra="forbid")
+
+	passed: bool
+	assertion: str
+	evidence: str | None
+	journey_id: str
+	duration_seconds: float
