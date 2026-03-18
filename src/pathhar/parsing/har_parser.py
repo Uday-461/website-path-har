@@ -122,7 +122,7 @@ def parse_har(har_path: str | Path) -> HarSummary:
 		duration_ms = entry.get("time")
 
 		# Extract body content
-		request_body_text = request.get("postData", {}).get("text")
+		request_body_text = (request.get("postData") or {}).get("text")
 		response_body_text = response.get("content", {}).get("text")
 
 		# Extract sizes
