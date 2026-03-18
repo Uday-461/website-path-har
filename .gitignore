@@ -31,4 +31,9 @@ Thumbs.db
 *.har
 
 # Reference repo (tracked separately)
-# reference_repo/
+reference_repo/
+
+# Claude Code
+.claude/
+CLAUDE.md
+.planning/

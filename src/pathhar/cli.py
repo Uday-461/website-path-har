@@ -19,6 +19,7 @@ def cli() -> None:
 @click.argument("url")
 @click.option("--auth", default=None, help="Auth instruction for the LLM agent")
 @click.option("--parallel", default=None, type=int, help="Max concurrent journeys (1-10)")
+@click.option("--max-steps", default=None, type=int, help="Max discovery steps (5-200)")
 @click.option("--headless/--no-headless", default=True, help="Run browser in headless mode")
 @click.option("--output-dir", default=None, help="Output directory path")
 @click.option("-v", "--verbose", is_flag=True, help="Enable debug logging")
@@ -26,6 +27,7 @@ def scan(
 	url: str,
 	auth: str | None,
 	parallel: int | None,
+	max_steps: int | None,
 	headless: bool,
 	output_dir: str | None,
 	verbose: bool,
@@ -45,6 +47,8 @@ def scan(
 
 	if parallel is not None:
 		config.max_concurrent_journeys = parallel
+	if max_steps is not None:
+		config.max_discovery_steps = max_steps
 	config.headless = headless
 	if output_dir is not None:
 		from pathlib import Path
@@ -55,7 +59,8 @@ def scan(
 
 	click.echo(f"Scanning {url}...")
 	click.echo(f"  LLM: {config.llm_model}")
-	click.echo(f"  Parallel: {config.max_concurrent_journeys}")
+	click.echo(f"  Parallel journeys: {config.max_concurrent_journeys}")
+	click.echo(f"  Max discovery steps: {config.max_discovery_steps}")
 	click.echo(f"  Headless: {config.headless}")
 	click.echo(f"  Output: {config.output_dir}")
 	click.echo()
