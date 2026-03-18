@@ -1,0 +1,16 @@
+{
+	"hooks": {
+		"PostToolUse": [
+			{
+				"matcher": "Edit|Write",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "if [[ \"$TOOL_FILE_PATH\" == *.py ]]; then cd /Users/uday/code/website-path-har && uv run ruff format \"$TOOL_FILE_PATH\" 2>/dev/null && uv run ruff check --fix \"$TOOL_FILE_PATH\" 2>/dev/null; fi",
+						"timeout": 10000
+					}
+				]
+			}
+		]
+	}
+}
